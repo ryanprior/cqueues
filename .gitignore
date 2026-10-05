@@ -9,3 +9,6 @@ src/5.3/
 src/errno.c
 src/lib/*.o
 src/lib/*.a
+/.zig-cache/
+/zig-out/
+/zig-pkg/

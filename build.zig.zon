@@ -1,0 +1,16 @@
+.{
+    .name = .cqueues,
+    .version = "0.16.0",
+    .dependencies = .{
+        .lua = .{
+            .url = "git+https://github.com/PegaFox/allyourcodebase-lua.git#9d12e6d06f80d90d5cb478b79fe086b9b1df042f",
+            .hash = "lua-5.4.7-zqrcysUiAACQA04jcT5JHRCbEGsI24cGqRbM_LPwDXWn",
+        },
+        .openssl = .{
+            .url = "git+https://github.com/allyourcodebase/openssl.git#6b318b447c8ff7529e3a2337a1df2a9b4816fee2",
+            .hash = "openssl-3.3.2-TC9C3Ze3ZABaKR5hc8KRnRPhTClKrKQKqTnXTUYkvmSR",
+        },
+    },
+    .paths = .{""},
+    .fingerprint = 0x593a2a33e9ce52b8,
+}
