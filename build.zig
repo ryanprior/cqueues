@@ -23,7 +23,7 @@ pub fn build(b: *std.Build) void {
     run_m4.setCwd(b.path("src"));
     const errorno_c = run_m4.captureStdOut(.{});
 
-    const build_flags = &.{
+    const build_flags = [_][]const u8{
         "-std=gnu99",
         "-fPIC",
         "-g",
@@ -36,6 +36,10 @@ pub fn build(b: *std.Build) void {
         "-D_GNU_SOURCE",
         "-DLUA_COMPAT_APIINTCASTS",
     };
+    const lib_build_flags = build_flags ++ [_][]const u8{
+        "-DSOCKET_DEBUG",
+        "-DHAVE_CONFIG_H",
+    };
     const libcqueues = b.addLibrary(.{
         .name = "cqueues",
         .linkage = .static,
@@ -46,12 +50,34 @@ pub fn build(b: *std.Build) void {
     });
     libcqueues.root_module.addCSourceFile(.{
         .file = errorno_c,
-        .flags = build_flags,
+        .flags = &build_flags,
         .language = .c,
     });
-    libcqueues.root_module.addCSourceFile(.{
-        .file = b.path("src/cqueues.c"),
-        .flags = build_flags,
+    libcqueues.root_module.addCSourceFiles(.{
+        .root = b.path("src/"),
+        .files = &.{
+            "cqueues.c",
+            "dns.c",
+            "notify.c",
+            "signal.c",
+            "socket.c",
+            "thread.c",
+            "lib/dns.c",
+            "lib/kpoll.c",
+            "lib/notify.c",
+            "lib/socket.c",
+        },
+        .flags = &build_flags,
+    });
+    libcqueues.root_module.addCSourceFiles(.{
+        .root = b.path("src/"),
+        .files = &.{
+            "lib/dns.c",
+            "lib/kpoll.c",
+            "lib/notify.c",
+            "lib/socket.c",
+        },
+        .flags = &lib_build_flags,
     });
     libcqueues.root_module.addIncludePath(b.path("src"));
     libcqueues.root_module.linkLibrary(lua_lib);
