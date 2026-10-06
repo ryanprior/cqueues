@@ -7,8 +7,8 @@
             .hash = "lua-5.4.7-zqrcysUiAACQA04jcT5JHRCbEGsI24cGqRbM_LPwDXWn",
         },
         .openssl = .{
-            .url = "git+https://github.com/allyourcodebase/openssl.git#6b318b447c8ff7529e3a2337a1df2a9b4816fee2",
-            .hash = "openssl-3.3.2-TC9C3Ze3ZABaKR5hc8KRnRPhTClKrKQKqTnXTUYkvmSR",
+            .url = "git+https://github.com/ryanprior/openssl.git#8b2a86919928a7e69ce2910a98b47bfba3bb2a07",
+            .hash = "openssl-3.3.2-TC9C3QS4ZAAocgWPekBbUmbp5zR7it3JMB__DoZnGxYT",
         },
     },
     .paths = .{""},
