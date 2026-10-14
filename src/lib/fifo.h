@@ -200,6 +200,10 @@ FIFO_NOTUSED static struct fifo *fifo_purge(struct fifo *fifo) {
 #endif
 
 static void fifo_realign(struct fifo *fifo) {
+  if(fifo->base == NULL || (fifo->count == 0 && fifo->head == 0)) {
+    // decline to realign uninitialized fifo
+    return;
+  }
 	if (fifo->size - fifo->head >= fifo->count) {
 		memmove(fifo->base, &fifo->base[fifo->head], fifo->count);
 		fifo->head = 0;
