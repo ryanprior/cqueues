@@ -19,7 +19,7 @@ pub fn build(b: *std.Build) void {
     });
     const openssl_lib = openssl_dep.artifact("openssl");
 
-    const run_m4 = b.addSystemCommand(&.{"m4", b.path("src/errno.c.m4").getPath(b)});
+    const run_m4 = b.addSystemCommand(&.{ "m4", b.path("src/errno.c.m4").getPath(b) });
     run_m4.setCwd(b.path("src"));
     const errorno_c = run_m4.captureStdOut(.{});
 
@@ -33,12 +33,14 @@ pub fn build(b: *std.Build) void {
         "-Wno-initializer-overrides",
         "-Wno-unused",
         "-Wno-dollar-in-identifier-extension",
+        "-DHAVE_CONFIG_H",
+        "-D_REENTRANT",
+        "-D_THREAD_SAFE",
         "-D_GNU_SOURCE",
         "-DLUA_COMPAT_APIINTCASTS",
     };
     const lib_build_flags = build_flags ++ [_][]const u8{
         "-DSOCKET_DEBUG",
-        "-DHAVE_CONFIG_H",
     };
     const libcqueues = b.addLibrary(.{
         .name = "cqueues",
